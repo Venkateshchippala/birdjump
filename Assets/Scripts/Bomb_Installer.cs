@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class Bomb_Installer : MonoBehaviour
 {
-    public List<GameObject> bomb;
+    public static Bomb_Installer instance;
+    public List<GameObject> bombs;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         if (GameController.instance.activateLvl_Number > 1 )
         {
-            InvokeRepeating("Bomb_Instantiation", 2, 3.5f);
+            InvokeRepeating("GetSpawn_Random_Bomn", 2, 3.5f);
         }
+    }
+    public GameObject GetSpawn_Random_Bomn()
+    {
+        float xPos = 100;
+        float yPos = Random.Range(-250, 250);
+        int indexVal = Random.Range(0, bombs.Count);
+
+        GameObject new_Bomb = bombs[indexVal];
+        bombs.RemoveAt(indexVal);
+        new_Bomb.SetActive(true);
+        new_Bomb.transform.localPosition = new Vector2(xPos, yPos);
+        return new_Bomb;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Return_to_Pool(GameObject gameObj)
     {
-        
-    }
-    public void Bomb_Instantiation()
-    {
-        
-        int indexval = Random.Range(0, bomb.Count);
-        float xPos = 600;
-        float yPos = Random.Range(-250, 250);
-        if (!GameController.instance.gameOver)
-        {
-            GameObject newobj = Instantiate(bomb[indexval], gameObject.transform);
-            newobj.transform.localPosition = new Vector2(xPos, yPos);
-        }
-        
-        
-        /*RectTransform rt = newobj.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(xPos, yPos);*/
+        gameObj.SetActive(false);
+        bombs.Add(gameObj);
     }
 }
