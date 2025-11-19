@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class SaviourBombCtrl : MonoBehaviour
 {
-   // public GameObject player;
-   // public GameObject saviour_Bomb;
+    public static SaviourBombCtrl instance;
+    public List<GameObject> saviour_Bombs;
 
-   /* public void Instantiate_SaverBomb()
+    private void Awake()
     {
-        if (GameController.instance.activateLvl_Number > 1)
+        if(instance == null)
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                GameObject newobj = Instantiate(saviour_Bomb, gameObject.transform);
-                newobj.transform.localPosition = transform.localPosition;
-                Debug.Log("I Am K ");
-            }
+            instance = this;
         }
-    }*/
+    }
+    public GameObject Get_Spawn_SaviourBomb()
+    {
+        int indexVal= Random.Range(0,saviour_Bombs.Count);
+        GameObject newObj = saviour_Bombs[indexVal];
+        saviour_Bombs.RemoveAt(indexVal);
+        newObj.SetActive(true);
+        return newObj;
+    }
+
+    public void Return_to_Pool(GameObject gameObj)
+    {
+        gameObj.SetActive(false);
+        saviour_Bombs.Add(gameObj);
+    }
 }

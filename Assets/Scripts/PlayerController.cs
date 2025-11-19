@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
-    public GameObject saviourBomb_Controller;
-    public GameObject saviour_Bomb;
+{   
     private Rigidbody2D rb;
     public float gravityVal = 6f;
     public bool bomb_Ready = true;
@@ -51,7 +49,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Instantiate_SaverBomb()
     {
         bomb_Ready = false;
-        GameObject newobj = Instantiate(saviour_Bomb, saviourBomb_Controller.transform);
+        GameObject newobj = SaviourBombCtrl.instance.Get_Spawn_SaviourBomb();
         newobj.transform.localPosition = transform.localPosition;
         yield return new WaitForSeconds(2);
         bomb_Ready = true;
