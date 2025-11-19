@@ -12,9 +12,7 @@ public class BombCtrl : MonoBehaviour
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
             if (transform.localPosition.x < -1050)
-            {
                 Bomb_Installer.instance.Return_to_Pool(this.gameObject);
-            }
         }
        
     }
