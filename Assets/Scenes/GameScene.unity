@@ -2075,12 +2075,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd162b0d9945cf942a64e2a19b9d3583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 20947688}
   saviour_Bombs:
   - {fileID: 816325133}
   - {fileID: 1017387349}
   - {fileID: 2058832493}
   - {fileID: 1004639289}
   - {fileID: 300133474}
+  bomb_Ready: 1
 --- !u!1 &1598265129
 GameObject:
   m_ObjectHideFlags: 0

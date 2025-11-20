@@ -20,9 +20,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, gravityVal);
             Debug.Log("I Am Wroking");
-        }
-        Delay_SaviourBomb();
-
+        }     
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -36,23 +34,5 @@ public class PlayerController : MonoBehaviour
             GameController.instance.gameOver = true;
         }
     }
-    public void  Delay_SaviourBomb()
-    {
-        if (GameController.instance.activateLvl_Number > 1 && !GameController.instance.gameOver)
-        {
-            if (Input.GetKeyDown(KeyCode.K) && bomb_Ready)
-            {
-                StartCoroutine(Instantiate_SaverBomb());
-            }
-        }
-    }
-    IEnumerator Instantiate_SaverBomb()
-    {
-        bomb_Ready = false;
-        GameObject newobj = SaviourBombCtrl.instance.Get_Spawn_SaviourBomb();
-        newobj.transform.localPosition = transform.localPosition;
-        yield return new WaitForSeconds(2);
-        bomb_Ready = true;
-
-    }
+    
 }
